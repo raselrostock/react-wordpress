@@ -1,9 +1,14 @@
 import React from 'react';
+import { Router } from '@reach/router';
+
+import Home from './components/Home';
 
 class App extends React.Component {
 	render() {
 		return (
-			<div>My App Component</div>
+			<Router>
+				<Home path="/" />
+			</Router>
 		);
 	}
 }
