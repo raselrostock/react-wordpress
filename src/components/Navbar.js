@@ -12,7 +12,7 @@ class Navbar extends React.Component {
 					        <Link className="nav-link" to="/">Home </Link>
 					    </li>
 					    <li className="nav-item">
-					        <Link className="nav-link" to="/post/:id">Post </Link>
+					        <Link className="nav-link" to="/login">Login </Link>
 					    </li>
 				    </ul>
 			  	</div>
