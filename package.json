@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/raselrostock/react-boilerplate.git"
+    "url": "git+https://github.com/raselrostock/react-wordpress.git"
   },
   "keywords": [],
   "author": "raselrostock",
   "license": "ISC",
-  "homepage": "https://github.com/raselrostock/react-boilerplate#readme",
+  "homepage": "https://github.com/raselrostock/react-wordpress#readme",
   "dependencies": {
     "css-loader": "^3.5.2",
     "file-loader": "^6.0.0",
