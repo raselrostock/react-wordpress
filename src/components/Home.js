@@ -13,9 +13,15 @@ class Home extends React.Component {
 		super( props );
 		this.state = {
 			posts: [],
-			loading: false
+			loading: false,
+			error: ''
 		}
 	}
+
+	createMarkup = ( data ) => ({
+		__html: data
+	});
+
 	componentDidMount() {
 		const wordpressSiteUrl = 'http://localhost/WP_React';
 		this.setState(
@@ -26,35 +32,44 @@ class Home extends React.Component {
 						if (res.data.length) {
 							this.setState({ loading: false, posts: res.data});
 						}
+						else {
+							this.setState( { loading: false, error: 'No Posts Found.'} );
+						}
 					})
-					.catch(err=> console.log(err));
+					.catch(err=> this.setState( { loading: false, error: err} ));
 		});
 	}
 	render() {
-		const { posts, loading } = this.state;
+		const { posts, loading, error } = this.state;
 		return (
-			<div>
+			<React.Fragment>
 				<Navbar />
+				{ error && <div className="alert alert-danger" dangerouslySetInnerHTML={ this.createMarkup( error )} /> }
 				{ loading && <img src={ Loader } className="loader" /> }
 				{
-					posts && posts.length && (
+					posts.length ? (
 						posts.map( post => 
 							(
-								<div className="card mb-3" key={ post.id }>
-									<h3 className="card-header">{ post.title.rendered }</h3>
+								<div className="card mb-3" key={ post.id } style={{ maxWidth: '50rem'}} >
+									<div className="card-header">
+										<Link to={`/post/${post.id}`} className="text-secondary font-weight-bold" style={{ textDecoration: 'none' }} >
+											{ renderHTML( post.title.rendered) }
+										</Link>
+									</div>
 									<div className="card-body">
-										{ renderHTML(post.content.rendered) }
+										<div className="card-text post-content">{ renderHTML(post.excerpt.rendered) }</div>
 									</div>
 									<div className="card-footer">
-										<Link className="btn btn-primary" to={`/post/${post.id}`}>View Post</Link>
+										<Moment fromNow> { post.date }</Moment>
+										<Link className="btn btn-secondary float-right" style={{ textDecoration: 'none'}} to={`/post/${post.id}`}>Read More ..</Link>
 									</div>
 								</div>
 							)
 						)
 
-					)
+					) : ''
 				}
-			</div>
+			</React.Fragment>
 		);
 	}
 }
