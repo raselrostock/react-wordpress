@@ -62,7 +62,7 @@ class Login extends React.Component {
 		const { loading, loggedIn, error, username, password } = this.state;
 		if( loggedIn || localStorage.getItem('token'))
 		{
-			return <Redirect to={`/dashboard/${ username }`} noThrow />;
+			return <Redirect to={`/dashboard`} noThrow />;
 		}
 		else
 		{

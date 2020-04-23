@@ -29,7 +29,7 @@ class Navbar extends React.Component {
 					    	(
 					    		<React.Fragment>
 						    		<li className="nav-item">
-						        		<NavLink to={ `/dashboard/${ userName }` }>Dashboard</NavLink>
+						        		<NavLink to={ `/dashboard ` }>Dashboard</NavLink>
 						    		</li>
 						    		<li className="nav-item">
 						        		<button className="btn btn-secondary ml-3" onClick= { this.handleLogout } >Logout</button>
@@ -45,15 +45,10 @@ class Navbar extends React.Component {
 					    
 				    </ul>
 			  	</div>
-			  	{
-			  		'/dashboard/root' === location.pathname ? 
-			  		(
-			  			<ToggleSidebarBtn
-			  				handleSidebarToggleClick={ this.props.handleSidebarToggleClick }
-							active={ this.props.active }
-			  			/>
-			  		) : ''
-			  	}
+			  	
+			  	{ window.location.pathname.includes( 'dashboard' ) ? (
+					<ToggleSidebarBtn/>
+				) : ''}
 			</nav>
 		);
 	}

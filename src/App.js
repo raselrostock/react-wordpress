@@ -6,19 +6,26 @@ import SinglePost from './components/SinglePost';
 import Login from './components/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import CreatePost from './components/dashboard/posts/CreatePost';
-import './style.css'
+import AppProvider from './components/context/AppProvider';
+import Posts from './components/dashboard/posts/Posts';
+import Pages from './components/dashboard/pages/Pages';
+import './style.css';
 
 
 class App extends React.Component {
 	render() {
 		return (
-			<Router>
-				<Home path="/" />
-				<Login path="/login" />
-				<SinglePost path="/post/:id" />
-				<Dashboard path="/dashboard/:userName" />
-				<CreatePost path="/dashboard/create-post" />
-			</Router>
+			<AppProvider>
+				<Router>
+					<Home path="/" />
+					<Login path="/login" />
+					<SinglePost path="/post/:id" />
+					<Posts path="/dashboard/posts" />
+					<Dashboard path="/dashboard" />
+					<CreatePost path="/dashboard/create-post" />
+					<Pages path="/dashboard/pages" />
+				</Router>
+			</AppProvider>
 		);
 	}
 }

@@ -1,42 +1,22 @@
-import React, { useState } from 'react';
-import { getUserName } from '../../functions';
+import React, { useContext } from 'react';
+
 import NavLink from '../../NavLink';
+import AppContext from '../.././context/AppContext';
+import PostMenu from './menus/PostMenu';
+import PageMenu from './menus/PageMenu';
 
-const SidebarMenu = ( props ) => {
+const SidebarMenu = () => {
 
-	const [ subMenuActive, setSubMenuActive ] = useState( false );
-	const userName = getUserName() ? getUserName() : '';
-
+	const [ store, setStore ] = useContext( AppContext );
 	return (
-		<nav id="sidebar" className={ props.active ? 'active' : ''}>
+		<nav id="sidebar" className={ store.sidebarActive ? 'active' : '' }>
 			<div className="sidebar-header">
-				<NavLink to={ `/dashboard/${userName}` }>React WP</NavLink>
+				<NavLink to={ `/dashboard` }>React WP</NavLink>
 			</div>
 
 			<ul className="list-unstyled components">
-				<li className="active">
-					<NavLink 
-						to="#"
-						data-toggle="collapse"
-						aria-expanded={ subMenuActive }
-						className={ `dropdown-toggle ${ !subMenuActive ? 'collapsed' : '' }` }
-						onClick= { () => setSubMenuActive( !subMenuActive)}
-					> Posts 
-					</NavLink>
-					<ul className={ `collapse list-unstyled ${ subMenuActive ? 'show' : ''} ` } id="homeSubmenu">
-						<li><NavLink to='/'>All Posts</NavLink></li>
-						<li><NavLink to='/dashboard/create-post'>Create Post</NavLink></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">Pages</a>
-				</li>
-				<li>
-					<a href="#">Media</a>
-				</li>
-				<li>
-					<a href="#">Users</a>
-				</li>
+				<PostMenu />
+				<PageMenu />
 			</ul>
 		</nav>
 		);

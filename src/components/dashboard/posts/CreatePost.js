@@ -57,7 +57,6 @@ class CreatePost extends React.Component {
 	render() {
 
 		const { title, content, postCreated, loading, message } = this.state;
-		console.log(this.state);
 		return (
 			<DashboardLayout>
 				<form onSubmit= { this.handleFormSubmit } className="mt-5" style={{ maxWidth: '800px' }}>
@@ -68,7 +67,7 @@ class CreatePost extends React.Component {
 						<input onChange= { this.handleChange} type="text" name="title" className="form-control" id="title" />
 					</div>
 					<div className="form-group">
-						<label htmlFor="my-post-content">Title</label>
+						<label htmlFor="my-post-content">Content</label>
 						<textarea onChange= { this.handleChange} name="content" className="form-control" id="my-post-content" rows="10" />
 					</div>
 					<button type="submit" className="btn btn-secondary" > Submit</button>
