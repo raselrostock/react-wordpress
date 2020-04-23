@@ -1,57 +1,58 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import NavLink from './NavLink';
 import  { isLoggedIn, getUserName } from './functions';
+import AppContext from "./context/AppContext";
 import ToggleSidebarBtn from './dashboard/sidebar/ToggleSidebarBtn';
 
-class Navbar extends React.Component {
+const Navbar = () => {
 
-	constructor( props ) {
-		super( props );
-	}
+	const [ store, setStore ] = useContext( AppContext );
 
-	handleLogout = () => {
+	const handleLogout = () => {
 		localStorage.removeItem('token');
+		localStorage.removeItem('userName');
+		setStore({
+			...store,
+			token: '',
+			userName: ''
+		});
 		window.location.href = '/';
 	}
-	
-	render() {
 
-		const userName = getUserName() ? getUserName() : '';
-		return (
-			<nav className="navbar navbar-expand-lg my-navbar main-navbar">
-			  	<div>
-			    	<ul className="navbar-nav my-navbar mr-auto">
-					    <li className="nav-item">
-					        <NavLink to="/">Home</NavLink>
-					    </li>
-					    { isLoggedIn() !== null ? 
-					    	(
-					    		<React.Fragment>
-						    		<li className="nav-item">
-						        		<NavLink to={ `/dashboard ` }>Dashboard</NavLink>
-						    		</li>
-						    		<li className="nav-item">
-						        		<button className="btn btn-secondary ml-3" onClick= { this.handleLogout } >Logout</button>
-						    		</li>
-						    	</React.Fragment>
-					    	) : 
-					    	(
+	return (
+		<nav className="navbar navbar-expand-lg my-navbar main-navbar">
+		  	<div>
+		    	<ul className="navbar-nav my-navbar mr-auto">
+				    <li className="nav-item">
+				        <NavLink to="/">Home</NavLink>
+				    </li>
+				    { isLoggedIn() !== null ? 
+				    	(
+				    		<React.Fragment>
 					    		<li className="nav-item">
-					        		<NavLink to="/login">Login </NavLink>
+					        		<NavLink to={ `/dashboard ` }>Dashboard</NavLink>
 					    		</li>
-					    	) 
-					    }
-					    
-				    </ul>
-			  	</div>
-			  	
-			  	{ window.location.pathname.includes( 'dashboard' ) ? (
-					<ToggleSidebarBtn/>
-				) : ''}
-			</nav>
-		);
-	}
+					    		<li className="nav-item">
+					        		<button className="btn btn-secondary ml-3" onClick= { handleLogout } >Logout</button>
+					    		</li>
+					    	</React.Fragment>
+				    	) : 
+				    	(
+				    		<li className="nav-item">
+				        		<NavLink to="/login">Login </NavLink>
+				    		</li>
+				    	) 
+				    }
+				    
+			    </ul>
+		  	</div>
+		  	
+		  	{ window.location.pathname.includes( 'dashboard' ) ? (
+				<ToggleSidebarBtn/>
+			) : ''}
+		</nav>
+	);
 }
 
 export default Navbar;
