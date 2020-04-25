@@ -77,8 +77,6 @@ const Login = () => {
 	}
 
 	const { username, password, error, loading } = loginFields;
-	console.log(store);
-	console.log(loginFields);
 	if ( store.token ) {
 		return ( <Redirect to={`/dashboard`} noThrow /> )
 	} else {

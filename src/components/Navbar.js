@@ -27,6 +27,9 @@ const Navbar = () => {
 				    <li className="nav-item">
 				        <NavLink to="/">Home</NavLink>
 				    </li>
+				    <li className="nav-item">
+				        <NavLink to="/blogs">Blogs</NavLink>
+				    </li>
 				    { isLoggedIn() !== null ? 
 				    	(
 				    		<React.Fragment>
