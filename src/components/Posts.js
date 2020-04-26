@@ -18,7 +18,7 @@ export const Posts = ( props ) => {
 	const [ posts, setPosts ] = useState( null );
 
 	useEffect( () => {
-		const restApiUrl = `http://localhost/WP_React/wp-json/v1/posts?page_no=${ currentPage }`;
+		const restApiUrl = `http://localhost/WP_React/wp-json/rae/v1/posts?page_no=${ currentPage }`;
 		axios.get( restApiUrl )
 			.then( res => {
 				setLoading( false );

@@ -6,7 +6,7 @@ import { createPaginationArray } from '../../utils/functions';
 export const Pagination = ( props ) => {
 
 	const { currentPage, totalPages, setCurrentPage } = props;
-
+	console.log(currentPage, totalPages);
 	const isThereNextPage = currentPage < totalPages;
 	const isTherePreviousPage = currentPage > 1;
 	const paginationArray = createPaginationArray( currentPage, totalPages );

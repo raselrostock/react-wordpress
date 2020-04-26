@@ -7,7 +7,7 @@ const Page = ( props ) => {
 	return (
 		<React.Fragment >
 			<Navbar />
-			<Posts pageId={1} />
+			<Posts pageId={ id } />
 		</React.Fragment >
 	);
 }
